@@ -489,7 +489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &316908730
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1931,7 +1931,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &864398883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2659,19 +2659,7 @@ MonoBehaviour:
   audioSource: {fileID: 1865460517}
   soundover:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1865460515}
-        m_TargetAssemblyTypeName: Quit, Assembly-CSharp
-        m_MethodName: quitgame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1095529167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3838,7 +3826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1603795158
 SpriteRenderer:
   m_ObjectHideFlags: 0
