@@ -66,5 +66,10 @@ blackscreen.SetActive(false);
     {
         Destroy(gameObject);
     }
+    if (Input.GetKeyDown(KeyCode.Space))
+    {
+updatejimmy = 32;
+audioSource.Stop();
+    }
 }
 }

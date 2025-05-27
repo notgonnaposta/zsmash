@@ -1,45 +1,49 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class GraphicSettings : MonoBehaviour
 {
     public Dropdown dropdown;
-    private Resolution[] resolutions;
+    private List<Resolution> uniqueResolutions = new List<Resolution>();
     private const string PREF_KEY = "ResolutionIndex";
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-        resolutions = Screen.resolutions;
+        Resolution[] allResolutions = Screen.resolutions;
         List<string> options = new List<string>();
+        HashSet<string> seen = new HashSet<string>();
         int currentResIndex = 0;
-        for (int i = 0; i< resolutions.Length; i++)
-        
+
+        for (int i = 0; i < allResolutions.Length; i++)
         {
-            string resOption = resolutions[i].width + " X " + resolutions[i].height;
-            if (!options.Contains(resOption))
-            options.Add(resOption);
-            if (resolutions[i].width == Screen.currentResolution.width &&
-            resolutions[i].height == Screen.currentResolution.height)
+            string label = allResolutions[i].width + " x " + allResolutions[i].height;
+
+            if (!seen.Contains(label))
             {
-             currentResIndex = i;
+                seen.Add(label);
+                options.Add(label);
+                uniqueResolutions.Add(allResolutions[i]);
+
+                if (allResolutions[i].width == Screen.currentResolution.width &&
+                    allResolutions[i].height == Screen.currentResolution.height)
+                {
+                    currentResIndex = uniqueResolutions.Count - 1;
+                }
             }
         }
+
+        dropdown.ClearOptions();
         dropdown.AddOptions(options);
+
         int savedIndex = PlayerPrefs.GetInt(PREF_KEY, currentResIndex);
         dropdown.value = savedIndex;
         dropdown.RefreshShownValue();
-        
+
         ApplyResolution(savedIndex);
-
-
-        dropdown.onValueChanged.AddListener(delegate { OnDropdownChanged(dropdown.value); });
-
-
+        dropdown.onValueChanged.AddListener(OnDropdownChanged);
     }
+
     void OnDropdownChanged(int index)
     {
         ApplyResolution(index);
@@ -49,13 +53,13 @@ public class GraphicSettings : MonoBehaviour
 
     void ApplyResolution(int index)
     {
-Resolution res = resolutions[index];
-Screen.SetResolution(res.width, res.height, Screen.fullScreen);
-    }
+        if (index < 0 || index >= uniqueResolutions.Count)
+        {
+            Debug.LogWarning("Resolution index out of bounds!");
+            return;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Resolution res = uniqueResolutions[index];
+        Screen.SetResolution(res.width, res.height, Screen.fullScreen);
     }
 }
