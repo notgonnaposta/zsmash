@@ -15,6 +15,7 @@ public class logofadein : MonoBehaviour
     public GameObject blackscreen;
     public GameObject menu;
     public static bool hasbeenplayed = false;
+    public mainmenumusic mainmenumusic;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +36,8 @@ public class logofadein : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         mainmenumusic.logofadein = updatejimmy;
+
         updatejimmy = updatejimmy + Time.deltaTime;
         if (updatejimmy >= fadeinstart && updatejimmy <= fadeinend)
         {
@@ -78,6 +81,7 @@ public class logofadein : MonoBehaviour
         {
             updatejimmy = 32;
             audioSource.Stop();
-    }
+        }
+       
 }
 }

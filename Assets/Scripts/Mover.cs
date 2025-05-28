@@ -103,12 +103,12 @@ if (collision2D.gameObject.CompareTag("Falling Object"))
             Vector3 direction = (Target.transform.position - transform.position).normalized;
             rb.linearVelocity = direction * haste;
         }
-        if (rb.linearVelocityX > 0.01f && Grabby.IsDrag == false && zdead == false && isresting == false)
+        if (rb.linearVelocityX > 0.01f && Grabby.IsDrag == false && zdead == false && isresting == false && Grabby.HasBeenGrabbed == false)
         {
             transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
 
         }
-        else if (rb.linearVelocityX < -0.01f && Grabby.IsDrag == false && zdead == false && isresting == false)
+        else if (rb.linearVelocityX < -0.01f && Grabby.IsDrag == false && zdead == false && isresting == false && Grabby.HasBeenGrabbed == false)
         {
             transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);
        }
