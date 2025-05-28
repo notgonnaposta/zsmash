@@ -14,6 +14,7 @@ public class logofadein : MonoBehaviour
     public AudioSource audioSource;
     public GameObject blackscreen;
     public GameObject menu;
+    public static bool hasbeenplayed = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,41 +36,48 @@ public class logofadein : MonoBehaviour
     void Update()
     {
         updatejimmy = updatejimmy + Time.deltaTime;
-if (updatejimmy >= fadeinstart && updatejimmy <= fadeinend)
-{
-float t = (updatejimmy - fadeinstart) / (fadeinend - fadeinstart);
-Color color = spriteRenderer.color;
-color.a = Mathf.SmoothStep(0f, 1f, t);
-spriteRenderer.color = color;
+        if (updatejimmy >= fadeinstart && updatejimmy <= fadeinend)
+        {
+            float t = (updatejimmy - fadeinstart) / (fadeinend - fadeinstart);
+            Color color = spriteRenderer.color;
+            color.a = Mathf.SmoothStep(0f, 1f, t);
+            spriteRenderer.color = color;
 
 
 
-}
-else if (updatejimmy >= fadeoutstart && updatejimmy <= fadeoutend)
-{
-float t = (updatejimmy - fadeoutstart) / (fadeoutend - fadeoutstart);
-Color color = spriteRenderer.color;
-color.a = Mathf.SmoothStep(1f, 0f, t);
-spriteRenderer.color = color;
+        }
+        else if (updatejimmy >= fadeoutstart && updatejimmy <= fadeoutend)
+        {
+            float t = (updatejimmy - fadeoutstart) / (fadeoutend - fadeoutstart);
+            Color color = spriteRenderer.color;
+            color.a = Mathf.SmoothStep(1f, 0f, t);
+            spriteRenderer.color = color;
 
-    }
-    if (updatejimmy > 19)
-    {
-blackscreen.SetActive(false);
-    }
-    if (updatejimmy > 29)
-    {
-        menu.SetActive(true);
-    }
+        }
+        if (updatejimmy > 19)
+        {
+            blackscreen.SetActive(false);
+        }
+        if (updatejimmy > 29)
+        {
+            menu.SetActive(true);
+        }
 
-    if (updatejimmy > 32)
-    {
-        Destroy(gameObject);
-    }
-    if (Input.GetKeyDown(KeyCode.Space))
-    {
-updatejimmy = 32;
-audioSource.Stop();
+        if (updatejimmy > 32)
+        {
+            hasbeenplayed = true;
+            Destroy(gameObject);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            updatejimmy = 32;
+            audioSource.Stop();
+        }
+        if (hasbeenplayed == true)
+        {
+            updatejimmy = 32;
+            audioSource.Stop();
     }
 }
 }

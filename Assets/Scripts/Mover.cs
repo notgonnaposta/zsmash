@@ -19,6 +19,7 @@ public class Mover : MonoBehaviour
     public float damagemultiplier = 10f;
     public bool zdead = false;
     public Zcount zcount;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -96,11 +97,20 @@ if (collision2D.gameObject.CompareTag("Falling Object"))
     // Update is called once per frame
     void FixedUpdate()
     {
-       if (Grabby.IsDrag == false && Target != null && isonground == true && isresting == false && zhealth > 0)
-       {
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        Vector3 direction = (Target.transform.position - transform.position).normalized;
-        rb.linearVelocity = direction * haste;
+        if (Grabby.IsDrag == false && Target != null && isonground == true && isresting == false && zhealth > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            Vector3 direction = (Target.transform.position - transform.position).normalized;
+            rb.linearVelocity = direction * haste;
+        }
+        if (rb.linearVelocityX > 0.01f && Grabby.IsDrag == false && zdead == false && isresting == false)
+        {
+            transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
+
+        }
+        else if (rb.linearVelocityX < -0.01f && Grabby.IsDrag == false && zdead == false && isresting == false)
+        {
+            transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);
        }
     }
 }
