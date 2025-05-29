@@ -5,6 +5,7 @@ public class GameoverYEAHHH : MonoBehaviour
     public GameObject Gameoverscreen;
     public Damage damage;
     public pause pause;
+    public bool latch = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,13 +15,14 @@ public class GameoverYEAHHH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (damage.health == 0)
+        if (damage.health == 0 && latch == false)
         {
 
 
             Gameoverscreen.SetActive(true);
-             Time.timeScale = 0;
-        AudioListener.pause = true;
+            Time.timeScale = 0;
+            AudioListener.pause = true;
+            latch = true;
         }
         
     }

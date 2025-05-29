@@ -12,7 +12,7 @@ public class logofadein : MonoBehaviour
     public float fadeoutend;
     public bool soundonce = false;
     public AudioSource audioSource;
-    public GameObject blackscreen;
+
     public GameObject menu;
     public static bool hasbeenplayed = false;
     public mainmenumusic mainmenumusic;
@@ -59,7 +59,7 @@ public class logofadein : MonoBehaviour
         }
         if (updatejimmy > 19)
         {
-            blackscreen.SetActive(false);
+       
         }
         if (updatejimmy > 29)
         {
