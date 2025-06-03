@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class logofadein : MonoBehaviour
@@ -61,12 +59,12 @@ public class logofadein : MonoBehaviour
         {
        
         }
-        if (updatejimmy > 29)
+        if (updatejimmy > 9)
         {
             menu.SetActive(true);
         }
 
-        if (updatejimmy > 32)
+        if (updatejimmy > 9)
         {
             hasbeenplayed = true;
             Destroy(gameObject);
@@ -74,12 +72,12 @@ public class logofadein : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            updatejimmy = 32;
+            updatejimmy = 9;
             audioSource.Stop();
         }
         if (hasbeenplayed == true)
         {
-            updatejimmy = 32;
+            updatejimmy = 9;
             audioSource.Stop();
         }
        

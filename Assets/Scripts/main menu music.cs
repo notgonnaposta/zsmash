@@ -14,7 +14,7 @@ public class mainmenumusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (logofadein >= 29 && haspeenblayed == false)
+        if (logofadein >= 8.9 && haspeenblayed == false)
         {
             audioSource.Play();
             haspeenblayed = true;

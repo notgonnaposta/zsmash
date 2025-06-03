@@ -1,27 +1,23 @@
 using System.Collections;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Mover : MonoBehaviour
 
 {
-    public GameObject Target;
-    public float haste = 5f;
-    private Rigidbody2D rb;
-    private Rigidbody2D piperb;
-    public Grabby Grabby;
-    public bool isonground;
-    public bool isresting;
-    public float zhealth = 100f;
-    public float damagemultiplier = 10f;
-    public bool zdead = false;
-    public Zcount zcount;
+    public GameObject Target; //the thing they go towards
+    public float haste = 5f; //speed multiplier
+    private Rigidbody2D rb; //the zombee's rigidbody
+    public Grabby Grabby; //grab script
+    public bool isonground; //bool to see if the zombee is colliding with a gameobject with the tag "ground"
+    public bool isresting; //bool to control the rest after drop
+    public float zhealth = 100f;//float for health
+    public float damagemultiplier = 10f;// damage mutliplier
+    public bool zdead = false;// death bool
+    public Zcount zcount;// count of how many have died, used to roll for a chance at powerup spawning
+    public bool latch; //footgun prevention 101: use latches
     
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // guess when start is called.
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,10 +28,11 @@ public class Mover : MonoBehaviour
     }
     void Update()
     {
-        if (zhealth < 0)
+        if (zhealth < 1 && zdead == false && latch == false)
         {
             StartCoroutine(Killer());
             isresting = true;
+            latch = true;
         }
     }
 
@@ -50,9 +47,11 @@ zdead = true;        gameObject.layer = LayerMask.NameToLayer("dead zombee");
     private IEnumerator Restafterdrop()
     {
         if (Grabby.HasBeenGrabbed == true){
+            transform.rotation = Quaternion.Euler(0,0, 90);
 isresting = true;
 if (isonground ==true){
 yield return new WaitForSeconds(5);
+transform.rotation = Quaternion.Euler(0,0, 0);
 isresting = false;
 Grabby.HasBeenGrabbed = false;
 }
@@ -81,7 +80,7 @@ if (collision2D.gameObject.CompareTag("Falling Object"))
         zhealth = -1f;
         isresting = true;
         Grabby.HasBeenGrabbed = true;
-        transform.rotation = quaternion.Euler(0,0, 90);
+        transform.rotation = Quaternion.Euler(0,0, 90);
     
     }
         
@@ -101,7 +100,7 @@ if (collision2D.gameObject.CompareTag("Falling Object"))
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             Vector3 direction = (Target.transform.position - transform.position).normalized;
-            rb.linearVelocity = direction * haste;
+            rb.linearVelocity = direction * haste; //linear velocity is a newer function, its different from the old one.
         }
         if (rb.linearVelocityX > 0.01f && Grabby.IsDrag == false && zdead == false && isresting == false && Grabby.HasBeenGrabbed == false)
         {

@@ -1,6 +1,4 @@
-using System.Numerics;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Grabby : MonoBehaviour
 {

@@ -1,6 +1,5 @@
-using UnityEngine.Rendering;
 using UnityEngine;
-using UnityEngine.AI;
+
 
 public class Powerupscaler : MonoBehaviour
 {

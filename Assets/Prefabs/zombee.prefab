@@ -660,6 +660,7 @@ MonoBehaviour:
   damagemultiplier: 0.92
   zdead: 0
   zcount: {fileID: 0}
+  latch: 0
 --- !u!114 &4616602024987804222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,7 +676,7 @@ MonoBehaviour:
   IsDrag: 0
   HasBeenGrabbed: 0
   mouseVelocity: {x: 0, y: 0}
-  YeetMultiplier: 1
+  YeetMultiplier: 0.5
 --- !u!114 &4019195877552098132
 MonoBehaviour:
   m_ObjectHideFlags: 0
